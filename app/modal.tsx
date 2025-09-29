@@ -1,29 +1,33 @@
-import { Link } from 'expo-router';
-import { StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+const Modal = () => {
+  const navigation = useNavigation();
 
-export default function ModalScreen() {
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText type="title">This is a modal</ThemedText>
-      <Link href="/" dismissTo style={styles.link}>
-        <ThemedText type="link">Go to home screen</ThemedText>
-      </Link>
-    </ThemedView>
+    <View style={styles.container}>
+      <Text style={styles.title}>This is a Modal Screen</Text>
+      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button}>
+        <Text style={styles.buttonText}>Close Modal</Text>
+      </TouchableOpacity>
+    </View>
   );
-}
+};
+
+export default Modal;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
+    flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "white",
   },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
+  title: {
+    fontSize: 24, marginBottom: 20,
+  },
+  button: {
+    paddingVertical: 12, paddingHorizontal: 20, backgroundColor: "#007AFF", borderRadius: 8,
+  },
+  buttonText: {
+    color: "white", fontWeight: "bold",
   },
 });
